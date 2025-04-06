@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Ghost, User, Loader2 } from 'lucide-react';
+import { Send, Ghost, User, Loader2, Menu, X } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -12,6 +12,7 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -99,12 +100,32 @@ function App() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto h-screen flex flex-col">
         {/* Header */}
-        <div className="bg-white rounded-t-xl p-4 border-b">
+        <div className="bg-white rounded-t-xl p-4 border-b flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
             <Ghost className="w-8 h-8 text-blue-500" />
             Ghost
           </h1>
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 rounded-md hover:bg-gray-100"
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Hamburger Menu */}
+        {isMenuOpen && (
+          <div className="absolute right-4 top-16 bg-white rounded-lg shadow-lg z-10 w-48 py-2 border">
+            <a
+              href="https://ridoan-zisan.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
+            >
+              Developer Profile
+            </a>
+          </div>
+        )}
 
         {/* Chat Messages - Takes remaining space */}
         <div 
