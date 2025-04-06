@@ -135,7 +135,7 @@ function App() {
           {messages.length === 0 && (
             <div className="text-center text-gray-500 mt-8">
               <Ghost className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-              <p className="text-lg">Hello, I'm Md Ridoan Mahmud Zisan.</p>
+              <p className="text-lg">Hello 👻, I'm Md Ridoan Mahmud Zisan.</p>
               <p className="text-sm">
                 Try asking a question or sharing your thoughts.
               </p>
