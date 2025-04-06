@@ -13,10 +13,20 @@ function App() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
+  // Scroll to bottom whenever messages or loading state changes
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const callAPI = async (prompt: string) => {
     setIsLoading(true);
@@ -158,6 +168,9 @@ function App() {
               </div>
             </div>
           )}
+          
+          {/* Empty div at the bottom to scroll into view */}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input Form */}
